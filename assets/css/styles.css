@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
 
 header{
@@ -9,9 +10,57 @@ header{
 
 .in-hero{
     position: absolute;
-    left: 5%;
-    bottom: 50%;
+    left: 2%;
+    top:45%;
+    background-color: rgba(0, 0, 0, 0.396);
+    border-radius: 20px;
+    padding: 15px;
+
+    
 }
+
+
+
+
+.in-case{
+
+    bottom: 0%;
+    width: 100%;
+    height:100%;
+    position: absolute;
+    visibility: hidden;
+    z-index: 5;
+    transition: width  0.7s;
+
+
+}
+.in-caseB{
+
+    bottom: -50%;
+    width: 100%;
+    height:100%;
+    visibility: hidden;
+    z-index: 5;
+
+
+
+
+}
+.case:hover .in-case{
+
+    visibility:visible;
+    width:125%;
+    height:125%;
+    left: -15%;
+
+}
+.case:hover .in-caseB{
+
+    visibility:visible;
+
+
+}
+
 
 main
 {
