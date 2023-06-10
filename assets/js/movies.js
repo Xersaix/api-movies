@@ -432,7 +432,7 @@ function openModal(id) {
  
           <ul class=" mt-6 is-centered is-flex is-flex-direction-row">
           <p class="mr-5">Genre:  </p>
-          <li class="mr-5">${genre1}</li>
+          <li class="mr-5 ">${genre1}</li>
           <li class="mr-5">${genre2}</li>
           <li class="mr-5">${genre3}</li>
           </ul>

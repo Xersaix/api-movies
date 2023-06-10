@@ -123,13 +123,13 @@ margin:0%;
 
 width: 100vw;
 height: 100%;
-background-color: rgba(0, 0, 0, 0.6);
+background-color: rgba(0, 0, 0, 0.877);
 display:none;
 }
 
 .modal .modal-content{
 
-    width:80%;
+    width:95%;
     height:100%;
     background-color: #101010;
     border-radius: 15px;
