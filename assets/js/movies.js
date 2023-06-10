@@ -10,6 +10,9 @@ var research_id = [];
 var modal = document.getElementById("modal");
 var modal_content = document.getElementById("modal-content");
 var my_page = document.getElementById("MyPage");
+var film_mode = document.getElementById('film-mode');
+var tv_mode = document.getElementById('tv-mode');
+var film_or_tv = true;
 
 var search_value;
 
@@ -26,7 +29,7 @@ function research() {
     }
   };
 
-  
+
   film_list_container.innerHTML = `
   
     <div class="column is-12 is-12-mobile is-half">
@@ -36,6 +39,7 @@ function research() {
 
   // Enleve les espace des input et remplace par %20
   search_value = input.value.split(' ').join("%20")
+
   let fetch_link = 'https://api.themoviedb.org/3/search/movie?query=&include_adult=false&language=fr-FR&page=1'
   // La rajoute au lien
   fetch_link = fetch_link.replace("query=", "query=" + search_value)
@@ -46,47 +50,44 @@ function research() {
   fetch(fetch_link, options)
     .then(response => response.json())
     .then(data => {
-      
 
-      
+
+
 
       for (let index = 0; index < data.results.length; index++) {
         research_id.push(data.results[index].id);
         let image_link = "https://image.tmdb.org/t/p/w500";
         let like_color = "#ffffff";
-        if (data.results[index].vote_average >= 7)
-        {
+        if (data.results[index].vote_average >= 7) {
           like_color = "#adff2f"
-      
-        }else if(data.results[index].vote_average > 4 && data.results[index].vote_average < 7)
-        {
+
+        } else if (data.results[index].vote_average > 4 && data.results[index].vote_average < 7) {
           like_color = "#ffb62f"
         }
-        else if(data.results[index].vote_average < 4)
-        {
+        else if (data.results[index].vote_average < 4) {
           like_color = "#ff0000"
         }
         if (data.results[index].backdrop_path != null) {
           image_link = image_link + data.results[index].backdrop_path
         }
         else {
-          image_link = "assets/img/no-image.png"
+          image_link = "../../assets/img/no-image.png"
         }
         film_list_container.innerHTML += `
   
         <div class="column is-2 is-half-mobile is-relative ">
 
         <figure class="image case is-2by1">
-        <img src="https://image.tmdb.org/t/p/w500${data.results[index].backdrop_path}" alt="Placeholder image" style="width:100%">
+        <img src="${image_link}" alt="Placeholder image" style="width:100%">
         <div class= "in-case">
         <figure class="image case is-2by1">
-        <img src="https://image.tmdb.org/t/p/w500${data.results[index].backdrop_path}" alt="Placeholder image" style="width:100%">
+        <img src="${image_link}" alt="Placeholder image" style="width:100%">
         <i class="bi bi-info-circle" id="next${index}-modal" onclick=(openModal(${data.results[index].id}))></i> 
         </figure>
 
         <div class= "in-caseB has-background-black-bis has-text-centered">
           <p class=""> ${data.results[index].title}</p>
-            <p class="has-text-center ml-5" style="color:${like_color}">Recommandé à ${data.results[index].vote_average.toFixed(1).toString().replace(".","")}% </p>
+            <p class="has-text-center ml-5" style="color:${like_color}">Recommandé à ${data.results[index].vote_average.toFixed(1).toString().replace(".", "")}% </p>
            
 
 
@@ -101,6 +102,94 @@ function research() {
     .catch(err => console.error(err));
 
 }
+
+
+
+function researchTv() {
+
+  let options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNGUzN2Y1YTU4ZTQ3ZGIwMGY4NTkyODU3OWY5MDBmOCIsInN1YiI6IjY0NmUxNjEzMzNhMzc2MDE1OGRjMDRhZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.10TTdpPPusGwjBn81duAdGN3P84qd250flrJJOeCyEs'
+    }
+  };
+
+
+  film_list_container.innerHTML = `
+  
+    <div class="column is-12 is-12-mobile is-half">
+        <p class="title  m-5 has-text-white">Titre associés à : ${input.value}</p>
+    </div>
+    `
+
+  // Enleve les espace des input et remplace par %20
+  search_value = input.value.split(' ').join("%20")
+
+  let fetch_link = 'https://api.themoviedb.org/3/search/tv?query=&include_adult=false&language=fr-FR&page=1'
+  // La rajoute au lien
+  fetch_link = fetch_link.replace("query=", "query=" + search_value)
+
+  research_id = [];
+
+
+  fetch(fetch_link, options)
+    .then(response => response.json())
+    .then(data => {
+
+
+      console.log(data)
+
+      for (let index = 0; index < data.results.length; index++) {
+        research_id.push(data.results[index].id);
+        
+        let like_color = "#ffffff";
+        if (data.results[index].vote_average >= 7) {
+          like_color = "#adff2f"
+
+        } else if (data.results[index].vote_average > 4 && data.results[index].vote_average < 7) {
+          like_color = "#ffb62f"
+        }
+        else if (data.results[index].vote_average < 4) {
+          like_color = "#ff0000"
+        }
+        let image_link = "https://image.tmdb.org/t/p/w500";
+        if (data.results[index].backdrop_path != null) {
+          image_link = image_link + data.results[index].backdrop_path
+        }
+        else {
+          image_link = "assets/img/no-image.png"
+        }
+        film_list_container.innerHTML += `
+  
+        <div class="column is-2 is-half-mobile is-relative ">
+
+        <figure class="image case is-2by1">
+        <img src="${image_link}" alt="Placeholder image" style="width:100%">
+        <div class= "in-case">
+        <figure class="image case is-2by1">
+        <img src="${image_link}" alt="Placeholder image" style="width:100%">
+        <i class="bi bi-info-circle" id="next${index}-modal" onclick=(openModal(${data.results[index].id}))></i> 
+        </figure>
+
+        <div class= "in-caseB has-background-black-bis has-text-centered">
+          <p class=""> ${data.results[index].name}</p>
+            <p class="has-text-center ml-5" style="color:${like_color}">Recommandé à ${data.results[index].vote_average.toFixed(1).toString().replace(".", "")}% </p>
+           
+
+
+        </div>
+
+        </div>
+            `
+      }
+
+
+    })
+    .catch(err => console.error(err));
+
+}
+
 
 function researchTop() {
 
@@ -161,21 +250,18 @@ function researchTop5() {
       for (let index = 0; index < 5; index++) {
 
         let like_color = "#ffffff"
-        if (data.results[index].vote_average > 7)
-        {
+        if (data.results[index].vote_average > 7) {
           like_color = "#adff2f"
 
-        }else if(data.results[index].vote_average > 4 && data.results[index].vote_average < 7)
-        {
+        } else if (data.results[index].vote_average > 4 && data.results[index].vote_average < 7) {
           like_color = "#ffb62f"
         }
-        else if(data.results[index].vote_average < 4)
-        {
+        else if (data.results[index].vote_average < 4) {
           like_color = "#ff0000"
         }
-        
+
         top5_id.push(data.results[index].id);
-        top5.innerHTML +=  `
+        top5.innerHTML += `
   
         <div class="column is-2 is-half-mobile is-relative ">
 
@@ -189,7 +275,7 @@ function researchTop5() {
 
         <div class= "in-caseB has-background-black-bis has-text-centered">
           <p class=""> ${data.results[index].title}</p>
-            <p class="has-text-center ml-5" style="color:${like_color}">Recommandé à ${data.results[index].vote_average.toFixed(1).toString().replace(".","")}% </p>
+            <p class="has-text-center ml-5" style="color:${like_color}">Recommandé à ${data.results[index].vote_average.toFixed(1).toString().replace(".", "")}% </p>
            
 
 
@@ -207,7 +293,7 @@ function researchTop5() {
 }
 
 
-function researchNext(){
+function researchNext() {
 
 
   let options = {
@@ -219,7 +305,7 @@ function researchNext(){
   };
 
 
-  
+
 
   fetch('https://api.themoviedb.org/3/movie/upcoming?language=fr-FR&page=1', options)
     .then(response => response.json())
@@ -228,19 +314,16 @@ function researchNext(){
       for (let index = 0; index < 5; index++) {
         new_id.push(data.results[index].id);
         let like_color = "#ffffff"
-        if (data.results[index].vote_average > 7)
-        {
+        if (data.results[index].vote_average > 7) {
           like_color = "#adff2f"
 
-        }else if(data.results[index].vote_average > 4 && data.results[index].vote_average < 7)
-        {
+        } else if (data.results[index].vote_average > 4 && data.results[index].vote_average < 7) {
           like_color = "#ffb62f"
         }
-        else if(data.results[index].vote_average < 4)
-        {
+        else if (data.results[index].vote_average < 4) {
           like_color = "#ff0000"
         }
-        
+
         next5.innerHTML += `
   
         <div class="column is-2 is-half-mobile is-relative ">
@@ -255,7 +338,7 @@ function researchNext(){
 
         <div class= "in-caseB has-background-black-bis has-text-centered">
           <p class=""> ${data.results[index].title}</p>
-            <p class="has-text-center ml-5" style="color:${like_color}">Recommandé à ${data.results[index].vote_average.toFixed(1).toString().replace(".","")}% </p>
+            <p class="has-text-center ml-5" style="color:${like_color}">Recommandé à ${data.results[index].vote_average.toFixed(1).toString().replace(".", "")}% </p>
            
 
 
@@ -274,13 +357,12 @@ function researchNext(){
 }
 
 
-function closeModal(){
+function closeModal() {
   modal.style.display = "none";
 }
 
-function openModal(id)
-{
-  
+function openModal(id) {
+
 
 
   const options = {
@@ -290,49 +372,69 @@ function openModal(id)
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNGUzN2Y1YTU4ZTQ3ZGIwMGY4NTkyODU3OWY5MDBmOCIsInN1YiI6IjY0NmUxNjEzMzNhMzc2MDE1OGRjMDRhZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.10TTdpPPusGwjBn81duAdGN3P84qd250flrJJOeCyEs'
     }
   };
+  if (film_or_tv) {
 
-let fetch_link = 'https://api.themoviedb.org/3/movie/?language=fr-FR';
+    let fetch_link = 'https://api.themoviedb.org/3/movie/?language=fr-FR';
 
-  fetch_link = fetch_link.replace("movie/","movie/"+ id);
-  fetch(fetch_link, options)
-    .then(data => data.json())
-    .then(data => {
-      let like_color = "#ffffff"
-      if (data.vote_average > 7)
-      {
-        like_color = "#adff2f"
+    fetch_link = fetch_link.replace("movie/", "movie/" + id);
+    fetch(fetch_link, options)
+      .then(data => data.json())
+      .then(data => {
+        let like_color = "#ffffff"
+        if (data.vote_average > 7) {
+          like_color = "#adff2f"
 
-      }else if(data.vote_average > 4 && data.vote_average < 7)
-      {
-        like_color = "#ffb62f"
-      }
-      else if(data.vote_average < 4)
-      {
-        like_color = "#ff0000"
-      }
-      
-      modal.style.display = "flex";
-      
-      modal_content.innerHTML = `
+        } else if (data.vote_average > 4 && data.vote_average < 7) {
+          like_color = "#ffb62f"
+        }
+        else if (data.vote_average < 4) {
+          like_color = "#ff0000"
+        }
+
+        modal.style.display = "flex";
+        let image_link = "https://image.tmdb.org/t/p/w500";
+        if (data.backdrop_path != null) {
+          image_link = image_link + data.backdrop_path
+        }
+        else {
+          image_link = "assets/img/no-image.png"
+        }
+        
+        let genre1 
+        let genre2
+        let genre3
+        if(data.genres.length < 3 )
+        {
+          genre1 = ""
+          genre2 = ""
+          genre3 = ""
+        }else
+        {
+          genre1 = data.genres[0].name
+          genre2 = data.genres[1].name
+          genre3 = data.genres[2].name
+        }
+
+        modal_content.innerHTML = `
       <div class="modal-head">
       <i class="bi bi-x-circle" onclick="closeModal()" id="close-modal"></i>
-      <img src="https://image.tmdb.org/t/p/original${data.backdrop_path}" alt="" style="heigth:20%;width:100%">
+      <img src="${image_link}" alt="" style="heigth:20%;width:100%">
       <div class="bottom-blur"></div>
       </div>
       <div class="columns container is-fluid">
       
         <div class="column ">
           <p class="has-text-centered">${data.title}</p>
-          <p class="has-text-centered " style="color:${like_color}">Recommandé à ${data.vote_average.toFixed(1).toString().replace(".","")}% </p>
+          <p class="has-text-centered " style="color:${like_color}">Recommandé à ${data.vote_average.toFixed(1).toString().replace(".", "")}% </p>
           <p class="has-text-grey has-text-centered">${data.tagline}</p>
           <p class="title has-text-white is-size-4-mobile">Sypnosis</p>
           <p class="is-size-6-mobile">${data.overview}</p>
  
           <ul class=" mt-6 is-centered is-flex is-flex-direction-row">
           <p class="mr-5">Genre:  </p>
-          <li class="mr-5">${data.genres[0].name}</li>
-          <li class="mr-5">${data.genres[1].name}</li>
-          <li class="mr-5">${data.genres[2].name}</li>
+          <li class="mr-5">${genre1}</li>
+          <li class="mr-5">${genre2}</li>
+          <li class="mr-5">${genre3}</li>
           </ul>
 
       </div>
@@ -341,28 +443,136 @@ let fetch_link = 'https://api.themoviedb.org/3/movie/?language=fr-FR';
       `;
 
 
-     
-    })
-    .catch(err => console.error(err));
+
+      })
+      .catch(err => console.error(err));
+  }else{
+
+
+    let fetch_link = 'https://api.themoviedb.org/3/tv/?language=fr-FR';
+
+    fetch_link = fetch_link.replace("tv/", "tv/" + id);
+    fetch(fetch_link, options)
+      .then(data => data.json())
+      .then(data => {
+        let like_color = "#ffffff";
+        let load_image;
+        if (data.vote_average > 7) {
+          like_color = "#adff2f"
+
+        } else if (data.vote_average > 4 && data.vote_average < 7) {
+          like_color = "#ffb62f"
+        }
+        else if (data.vote_average < 4) {
+          like_color = "#ff0000"
+        }
+        let image_link = "https://image.tmdb.org/t/p/w500";
+        if (data.backdrop_path != null) {
+          image_link = image_link + data.backdrop_path
+        }
+        else {
+          image_link = "assets/img/no-image.png"
+        }
+        modal.style.display = "flex";
+
+        let genre1 
+        let genre2
+        let genre3
+        if(data.genres.length == 0)
+        {
+          genre1 = ""
+          genre2 = ""
+          genre3 = ""
+        }else
+        {
+          genre1 = data.genres[0].name
+          genre2 = data.genres[1].name
+          genre3 = data.genres[2].name
+        }
+
+        modal_content.innerHTML = `
+      <div class="modal-head">
+      <i class="bi bi-x-circle" onclick="closeModal()" id="close-modal"></i>
+      <img src="${image_link}" alt="" style="heigth:20%;width:100%">
+      <div class="bottom-blur"></div>
+      </div>
+      <div class="columns container is-fluid">
+      
+        <div class="column ">
+          <p class="has-text-centered">${data.name}</p>
+          <p class="has-text-centered " style="color:${like_color}">Recommandé à ${data.vote_average.toFixed(1).toString().replace(".", "")}% </p>
+          <p class="has-text-grey has-text-centered">${data.tagline}</p>
+          <p class="title has-text-white is-size-4-mobile">Sypnosis</p>
+          <p class="is-size-6-mobile">${data.overview}</p>
+ 
+          <ul class=" mt-6 is-centered is-flex is-flex-direction-row">
+          <p class="mr-5">Genre:  </p>
+          <li class="mr-5">${genre1}</li>
+          <li class="mr-5">${genre2}</li>
+          <li class="mr-5">${genre3}</li>
+          </ul>
+
+      </div>
+
+      </div>
+      `;
+
+
+
+      })
+      .catch(err => console.error(err));
+
+  }
+
 
 
 }
 
+film_mode.addEventListener("click",function(){
 
+
+  film_or_tv = true;
+  input.value = "";
+  input.placeholder = "Recherche: Film";
+  film_list_container.innerHTML = `
+  
+  <div class="column is-12 is-12-mobile is-half">
+      <p class="title  m-5 has-text-white">Titre associés à </p>
+  </div>
+  `
+})
+
+tv_mode.addEventListener("click",function(){
+
+
+  film_or_tv = false;
+  input.value = "";
+  input.placeholder = "Recherche: Series";
+  film_list_container.innerHTML = `
+  
+  <div class="column is-12 is-12-mobile is-half">
+      <p class="title  m-5 has-text-white">Titre associés à  </p>
+  </div>
+  `
+})
 
 input.addEventListener("input", function () {
-  research()
+  if (film_or_tv) {
+    research()
+  }
+  else {
+    researchTv()
+  }
 })
 search_button.addEventListener("click", function () {
 
   research();
 })
 // Ferme le modal
-modal.addEventListener("click",function(e){
-if(e.target == modal)
-{
-  modal.style.display = "none";
-}
+modal.addEventListener("click", function (e) {
+  if (e.target == modal) {
+    modal.style.display = "none";
+  }
 })
 
 
