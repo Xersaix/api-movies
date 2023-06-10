@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" class="has-navbar-fixed-top has-background-black">
+<html lang="fr" class="has-navbar-fixed-top has-background-black" id="myPage">
 
 <head>
   <meta charset="UTF-8">
@@ -13,14 +13,15 @@
 <body class="has-background-black has-text-white">
 
 
-  <header >
+  <header>
     <!-- Navbar -->
     <div class="columns ">
       <nav class="navbar mynavbar is-fixed-top has-background-black" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <a href="" class="navbar-item"> <img src="assets/img/KK.png" alt=""></a>
           <!-- Burger -->
-          <a role="button" class="navbar-burger has-text-white " aria-label="menu" aria-expanded="false" data-target="navbarKK">
+          <a role="button" class="navbar-burger has-text-white " aria-label="menu" aria-expanded="false"
+            data-target="navbarKK">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -30,18 +31,20 @@
         <div id="navbarKK" class="navbar-menu has-background-black">
           <!-- Debut de la navbar -->
           <div class="navbar-start">
-            <a class="navbar-item has-text-white">Films</a>
+            <a class="navbar-item has-text-white is-hovered">Films</a>
             <a class="navbar-item has-text-white">Séries</a>
           </div>
           <!-- Fin de la navbar -->
           <div class="navbar-end is-flex-desktop is-align-items-center">
             <!-- Barre de recherche -->
-            <input class="input is-normal navbar-item has-background-black has-text-white" type="text" placeholder="Recherche" id="film-input">
+            <input class="input is-normal navbar-item has-background-black has-text-white" type="text"
+              placeholder="Recherche" id="film-input">
             <!-- Bouton -->
-            <button class="navbar-item button has-background-black border-color-black" id="search"><i class="bi bi-search has-text-white"></i></button>
+            <button class="navbar-item button has-background-black border-color-black" id="search"><i
+                class="bi bi-search has-text-white"></i></button>
             <!-- Dropdown -->
-            <div class="navbar-item has-dropdown is-hoverable ">
-              <a class="navbar-link is-arrowless has-text-white"><i class="bi bi-person-circle"></i></a>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link is-arrowless has-text-white is-size-3"><i class="bi bi-person-circle"></i></a>
               <!-- Dropdown-content -->
               <div class="navbar-dropdown is-right has-background-black">
                 <a class="navbar-item dropdown-item has-text-white">Se connecter</a>
@@ -66,49 +69,104 @@
     </section>
 
   </header>
-  <main>
-<!-- Top5 title -->
-  <div class="columns">
-    <div class="column is-half">
-        <p class="title is-size-12-mobile m-5 has-text-white">Top 5 des meilleurs films</p>
+  <main class="mb-5">
+    <!-- Top5 title -->
+    <div class="columns">
+      <div class="column is-half">
+        <p class="title is-size-12-mobile m-5 has-text-white">Populaires</p>
+      </div>
     </div>
-  </div>
-<!-- Top5 div -->
-    <div class=" columns has-background-black is-multiline is-fluid is-flex is-flex-direction-row is-justify-content-space-around "id="top5">
-
-    
-    </div>
-<!-- next title -->
-<div class="columns">
-  <div class="column is-half">
-      <p class="title is-size-12-mobile m-5 has-text-white">Prochainement</p>
-  </div>
-</div>
-<!-- next div -->
-  <div class=" columns has-background-black is-multiline is-fluid is-flex is-flex-direction-row is-justify-content-space-around "id="next5">
-
-  
-  </div>
-
-
-
-
-
-
-<div class="container is-fluid">
-    <div class="columns py-2 is-multiline is-fluid mt-5 is-flex is-flex-direction-row is-justify-content-space-around " id="film-list">
-
-
-      <article>
-
-
-      </article>
+    <!-- Top5 div -->
+    <div
+      class=" columns has-background-black is-multiline is-fluid is-flex is-flex-direction-row is-justify-content-space-around "
+      id="top5">
 
 
     </div>
-</div>
+    <!-- next title -->
+    <div class="columns">
+      <div class="column is-half">
+        <p class="title is-size-12-mobile m-5 has-text-white">Prochainement</p>
+      </div>
+    </div>
+    <!-- next div -->
+    <div
+      class=" columns has-background-black is-multiline is-fluid is-flex is-flex-direction-row is-justify-content-space-around "
+      id="next5">
+
+
+    </div>
+
+
+
+
+
+    <!-- Research div -->
+    <div class="container is-fluid">
+      <div class="columns">
+        <div class="column is-half">
+          <p class="title is-size-12-mobile has-text-white">Recherche</p>
+        </div>
+      </div>
+      <div
+        class="columns py-2 is-multiline is-fluid mt-5 is-flex is-flex-direction-row is-justify-content-space-around "
+        id="film-list">
+        <div class="column is-12 is-12-mobile is-half">
+          <p class="title  m-5 has-text-white">Titre associés à </p>
+      </div>
+
+
+      </div>
+    </div>
+
+
+    <div class="modal is-clipped" id="modal">
+      <div class="modal-content" id="modal-content">
+
+      </div>
+    </div>
 
   </main>
+<!-- Footer -->
+  <footer class="container mt-7">
+
+    <div class="columns">
+
+      <div class="column is-2 is-flex is-flex-direction-column">
+
+        <span><a class="is-size-4 mr-2"><i class="bi bi-facebook"></i></a> <a class="is-size-4 mr-2"><i
+              class="bi bi-instagram"></i></a> <a class="is-size-4 mr-2"><i class="bi bi-twitter"></i></a> <a
+            class="is-size-4 mr-2"><i class="bi bi-youtube"></i></a> </span>
+
+        <a class="my-2">Audioscription</a>
+        <a class="my-2">Relations investisseurs</a>
+        <a class="my-2">Confidentialité</a>
+        <a class="my-2">Nous Contacter</a>
+        <p class="has-text-grey is-size-7"><i class="bi bi-c-circle "></i> Copyright 2003 KK, Inc</p>
+
+      </div>
+      <div class="column is-centered is-2 is-flex is-flex-direction-column is-offset-1">
+        <a class="my-2">Centre d'aide</a>
+        <a class="my-2">Recrutement</a>
+        <a class="my-2">Information légales</a>
+
+      </div>
+      <div class="column is-2 is-flex is-flex-direction-column is-offset-1">
+        <a class="my-2">Carte cadeaux</a>
+        <a class="my-2">Boutique</a>
+        <a class="my-2">Préferences de cookies</a>
+      </div>
+      <div class="column is-2 is-flex is-flex-direction-column is-offset-1">
+        <a class="my-2">Presse</a>
+        <a class="my-2">Conditions d'utilisation</a>
+        <a class="my-2">Mentions légales</a>
+      </div>
+
+    </div>
+
+
+
+  </footer>
 </body>
 
 </html>

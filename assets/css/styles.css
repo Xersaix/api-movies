@@ -10,7 +10,7 @@ header{
 
 .in-hero{
     position: absolute;
-    left: 2%;
+    left: 5%;
     top:45%;
     background-color: rgba(0, 0, 0, 0.396);
     border-radius: 20px;
@@ -18,8 +18,24 @@ header{
 
     
 }
+#film-input::placeholder{
+    color:white;
+}
 
+#hero-body #top-modal{
+    position: absolute;
+    right:5%;
+    bottom: 15%;
+    font-style: 2em;
+    background-color: rgba(0, 0, 0, 0.396);
+    border-color: rgba(0, 0, 0, 0.396);
+    color: white;
 
+}
+#hero-body #top-modal:hover{
+    background-color: white;
+    color: #101010;
+}
 
 
 .in-case{
@@ -38,7 +54,7 @@ header{
 
     bottom: -50%;
     width: 100%;
-    height:100%;
+    min-height:50px;
     visibility: hidden;
     z-index: 5;
 
@@ -61,6 +77,18 @@ header{
 
 }
 
+.case .in-case i{
+
+position: absolute;
+right:2%;
+bottom:2%;
+font-size: 1.5em;
+}
+
+.case .in-case i:hover{
+
+    cursor: pointer;
+}
 
 main
 {
@@ -87,4 +115,57 @@ margin:0%;
 .mynavbar{
 
     background-color: rgba(0, 0, 0, 0.001);
+}
+
+
+.modal
+{
+
+width: 100vw;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.6);
+display:none;
+}
+
+.modal .modal-content{
+
+    width:80%;
+    height:100%;
+    background-color: #101010;
+    border-radius: 15px;
+    color: white;
+}
+.modal-content .modal-head{
+    position: relative;
+    height: 50vh;
+
+}
+.modal-head #close-modal{
+    position: absolute;
+    right: 3%;
+    top: 3%;
+    font-size: 2em;
+
+
+}
+.modal-head #close-modal:hover{
+cursor: pointer;
+
+}
+.modal-head img{
+    height: 100%;
+    width: 100%;
+    
+}
+
+.modal-head .bottom-blur{
+
+    
+    position:absolute;
+    bottom: -1%;
+    width:100%;
+    background-image: linear-gradient(to bottom, transparent, #101010);
+
+    height:50%;
+    z-index: 14;
 }
