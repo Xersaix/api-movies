@@ -9,7 +9,7 @@ var new_id = [];
 var research_id = [];
 var modal = document.getElementById("modal");
 var modal_content = document.getElementById("modal-content");
-var my_page = document.getElementById("MyPage");
+var my_page = document.getElementById("myPage");
 var film_mode = document.getElementById('film-mode');
 var tv_mode = document.getElementById('tv-mode');
 var film_or_tv = true;
@@ -359,6 +359,7 @@ function researchNext() {
 
 function closeModal() {
   modal.style.display = "none";
+  my_page.classList.remove("is-clipped")
 }
 
 function openModal(id) {
@@ -443,7 +444,6 @@ function openModal(id) {
       `;
 
 
-
       })
       .catch(err => console.error(err));
   }else{
@@ -525,7 +525,7 @@ function openModal(id) {
   }
 
 
-
+my_page.classList.add("is-clipped")
 }
 
 film_mode.addEventListener("click",function(){
@@ -547,7 +547,7 @@ tv_mode.addEventListener("click",function(){
 
   film_or_tv = false;
   input.value = "";
-  input.placeholder = "Recherche: Series";
+  input.placeholder = "Recherche: Séries";
   film_list_container.innerHTML = `
   
   <div class="column is-12 is-12-mobile is-half">
@@ -572,6 +572,7 @@ search_button.addEventListener("click", function () {
 modal.addEventListener("click", function (e) {
   if (e.target == modal) {
     modal.style.display = "none";
+    my_page.classList.remove("is-clipped")
   }
 })
 
